@@ -586,7 +586,7 @@ function Dashboard({
             habit.
           </p>
         </div>
-        <div className="flex flex-col items-start gap-4 lg:items-end">
+        {/* <div className="flex flex-col items-start gap-4 lg:items-end">
           <button
             disabled={isLogging}
             onClick={logEvent}
@@ -603,6 +603,37 @@ function Dashboard({
           </button>
           <p className="flex items-center gap-2 text-[11px] text-white/35 lg:mr-2">
             <Clock3 className="h-3.5 w-3.5" /> Synced with the shared database{" "}
+            <span className="text-lime-300">↗</span>
+          </p>
+        </div> */}
+        <div className="flex flex-col items-start gap-4 lg:items-end">
+          <button
+            disabled={isLogging}
+            onClick={logEvent}
+            className={`cta-shadow pulse-soft group relative flex min-h-[116px] w-full items-center justify-center gap-3 overflow-hidden rounded-2xl bg-lime-300 px-8 text-lg font-bold text-[#1b1e18] transition-all duration-200 hover:bg-lime-200 active:scale-[.975] disabled:cursor-wait disabled:opacity-70 sm:min-h-[130px] lg:max-w-[350px] ${justLogged ? "scale-[.98]" : ""}`}
+          >
+            <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-500 group-hover:translate-x-full" />
+
+            <Zap
+              className={`relative h-5 w-5 fill-current ${justLogged ? "animate-bounce" : ""}`}
+            />
+
+            <span className="relative">
+              {isLogging ? "LOGGING…" : "I GOONED"}
+            </span>
+
+            <span className="relative text-xl">💀</span>
+          </button>
+
+          {/* Honor policy */}
+          <p className="text-center text-[11px] font-medium text-rose-300/70 lg:max-w-[350px]">
+            ⚠️ If you didn't goon but you're trying to click "I GOONED", then
+            you're gay. Be honest. 💀
+          </p>
+
+          <p className="flex items-center gap-2 text-[11px] text-white/35 lg:mr-2">
+            <Clock3 className="h-3.5 w-3.5" />
+            Synced with the shared database{" "}
             <span className="text-lime-300">↗</span>
           </p>
         </div>
