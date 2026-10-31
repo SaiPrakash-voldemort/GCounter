@@ -705,6 +705,7 @@ function Dashboard({
             Synced with the shared database{" "}
             <span className="text-lime-300">↗</span>
           </p>
+          <LastEventTimer timestamp={data.history[0]?.timestamp} />
         </div>
       </section>
       <section className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
