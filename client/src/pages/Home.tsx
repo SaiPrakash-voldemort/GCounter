@@ -4,7 +4,7 @@ import {
   type FriendSummary,
   type LeaderboardEntry,
 } from "@/lib/useGoonCounter";
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { toast } from "sonner";
 import {
   Activity,
@@ -545,6 +545,75 @@ function ErrorState({
           Try again
         </button>
       </div>
+    </div>
+  );
+}
+
+function formatElapsedTime(timestamp: string, now: number) {
+  const elapsed = Math.max(
+    0,
+    Math.floor((now - new Date(timestamp).getTime()) / 1000)
+  );
+
+  const days = Math.floor(elapsed / 86400);
+  const hours = Math.floor((elapsed % 86400) / 3600);
+  const minutes = Math.floor((elapsed % 3600) / 60);
+  const seconds = elapsed % 60;
+
+  if (days > 0) {
+    return `${days}d ${hours}h ${minutes}m ${seconds}s`;
+  }
+
+  if (hours > 0) {
+    return `${hours}h ${minutes}m ${seconds}s`;
+  }
+
+  if (minutes > 0) {
+    return `${minutes}m ${seconds}s`;
+  }
+
+  return `${seconds}s`;
+}
+
+function LastEventTimer({ timestamp }: { timestamp?: string }) {
+  const [now, setNow] = useState(() => Date.now());
+
+  useEffect(() => {
+    if (!timestamp) return;
+
+    setNow(Date.now());
+
+    const interval = window.setInterval(() => {
+      setNow(Date.now());
+    }, 1000);
+
+    return () => window.clearInterval(interval);
+  }, [timestamp]);
+
+  if (!timestamp) {
+    return (
+      <p className="text-center text-[11px] text-white/35">
+        No logs yet. Start your record. 💀
+      </p>
+    );
+  }
+
+  const timestampMs = new Date(timestamp).getTime();
+
+  if (!Number.isFinite(timestampMs)) return null;
+
+  return (
+    <div className="flex flex-col items-center gap-1">
+      <p className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/40">
+        <Clock3 className="h-3.5 w-3.5" />
+        Time since last goon
+      </p>
+
+      <p className="mono-font text-lg font-semibold tabular-nums text-lime-300">
+        {formatElapsedTime(timestamp, now)}
+      </p>
+
+      <p className="text-[10px] text-white/30">The clock doesn't lie. 💀</p>
     </div>
   );
 }
