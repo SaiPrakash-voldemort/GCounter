@@ -700,11 +700,11 @@ function Dashboard({
             you're gay. Be honest. 💀
           </p>
 
-          <p className="flex items-center gap-2 text-[11px] text-white/35 lg:mr-2">
+          {/* <p className="flex items-center gap-2 text-[11px] text-white/35 lg:mr-2">
             <Clock3 className="h-3.5 w-3.5" />
             Synced with the shared database{" "}
             <span className="text-lime-300">↗</span>
-          </p>
+          </p> */}
           <LastEventTimer timestamp={data.history[0]?.timestamp} />
         </div>
       </section>
